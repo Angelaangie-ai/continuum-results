@@ -259,7 +259,7 @@
     <p class="eyebrow">Continuum Research · Technical Report</p>
     <h1>Continuum Results</h1>
     <p class="byline">August 2026</p>
-    <p class="dek">Results from our validation work: mortality prediction in national aging cohorts, functional-trajectory forecasting on the US Health and Retirement Study, next-wave IADL-difficulty prediction in MHAS, and next-wave grip-strength and cognition forecasts in SHARE, KLoSA, and LASI-DAD. This page grows as results are finalized, with current contents below.</p>
+    <p class="dek">Results from our validation work: mortality prediction in national aging cohorts, functional-trajectory forecasting on the US Health and Retirement Study, next-wave IADL-difficulty prediction in MHAS, next-wave grip-strength and cognition forecasts in SHARE, KLoSA, and LASI-DAD, and a fasting-glucose pilot in CALERIE. This page grows as results are finalized, with current contents below.</p>
   </header>
 
   <article>
@@ -268,7 +268,7 @@
       <p class="sec-eyebrow"><b>Introduction</b> · How to read these results</p>
       <p>Continuum builds models that forecast where a person's health is going: mortality risk, daily function, physical strength, and cognition, all from the history they already have. Before any of that reaches a product, it has to prove itself on data we cannot touch: <strong>public longitudinal aging studies</strong> that have followed hundreds of thousands of people for decades, across studies spanning Europe, the Americas, and Asia, with real outcomes on record.</p>
       <p>Every result on this page follows the same rules. Models are scored on <strong>held-out people they never trained on</strong>. Predictions are made from earlier study waves only and checked against what actually happened at later ones. And where a number needs a caveat, the caveat sits next to the number.</p>
-      <p>Four groups of results so far: mortality prediction in Mexico, China, and Costa Rica; daily-function forecasting in the United States; next-wave IADL-difficulty prediction in Mexico; and next-wave grip-strength and cognition forecasts in Europe, South Korea, and India.</p>
+      <p>Five groups of results so far: mortality prediction in Mexico, China, and Costa Rica; daily-function forecasting in the United States; next-wave IADL-difficulty prediction in Mexico; next-wave grip-strength and cognition forecasts in Europe, South Korea, and India; and a fasting-glucose pilot in the United States.</p>
     </section>
 
     <div class="summary" aria-label="Summary of results">
@@ -292,6 +292,11 @@
         <span class="n">04 · Grip &amp; cognition</span>
         <span class="t"><strong>Next-wave forecasts in SHARE, KLoSA, and LASI-DAD.</strong> R² of 0.770, 0.715, and 0.740 for future grip strength and cognition, beating carried-forward measurements in every one of 20 held-out splits, in all three cohorts.</span>
         <span class="s"><b>20 / 20</b><small>splits won · ×3 cohorts</small></span>
+      </a>
+      <a class="sum-row" href="#glucose">
+        <span class="n">05 · Fasting glucose</span>
+        <span class="t"><strong>Forecasting fasting glucose 12 months ahead in CALERIE.</strong> Out-of-fold predictions in 199 participants missed by 3.11 mg/dL on average, a 15.8% error reduction over carrying baseline forward, with 97.5% of predictions within ±10 mg/dL.</span>
+        <span class="s"><b>3.11 mg/dL</b><small>avg error · month 12</small></span>
       </a>
     </div>
 
@@ -610,6 +615,52 @@
 
     </section>
 
+    <section id="glucose">
+      <p class="sec-eyebrow"><b>CALERIE</b> · Early biomarker pilot</p>
+      <h2>Forecasting fasting glucose 12 months ahead</h2>
+      <p>Using baseline clinical information, the model predicted directly measured fasting glucose 12 months later in 199 CALERIE participants. Every prediction was <strong>out-of-fold</strong>, meaning each participant was evaluated by a model that had not trained on them.</p>
+
+      <div class="cohorts" aria-label="CALERIE fasting glucose result">
+        <div class="cohort">
+          <span class="place">USA · 199 participants · out-of-fold</span>
+          <span class="nm">CALERIE</span>
+          <span class="full">Fasting glucose at Month 12, from baseline clinical information</span>
+          <span class="auroc-k">Average absolute error</span>
+          <span class="auroc-v">3.11 <small style="font-size:1.4rem;">mg/dL</small></span>
+          <dl>
+            <dt>Baseline error · carry forward</dt><dd>3.69 mg/dL</dd>
+            <dt>Error reduction</dt><dd>15.8%</dd>
+            <dt>R²</dt><dd>0.389</dd>
+            <dt>Calibration slope</dt><dd>0.964</dd>
+            <dt>Participants</dt><dd>199</dd>
+            <dt>Study groups</dt><dd>129 CR / 70 control</dd>
+          </dl>
+        </div>
+        <div class="cohort">
+          <span class="place">Prediction accuracy bands</span>
+          <span class="nm">Within range</span>
+          <span class="full">Share of the 199 held-out predictions landing near the true measurement</span>
+          <span class="auroc-k">Within ±5 mg/dL</span>
+          <span class="auroc-v">78.4%</span>
+          <div class="meter" role="img" aria-label="78.4 percent of predictions within plus or minus 5 milligrams per deciliter"><i style="width:78.4%"></i></div>
+          <div class="meter-scale"><span>within ±10 mg/dL: 97.5%</span><span>100%</span></div>
+          <dl>
+            <dt>Within ±5 mg/dL</dt><dd>156 of 199</dd>
+            <dt>Within ±10 mg/dL</dt><dd>194 of 199</dd>
+          </dl>
+        </div>
+      </div>
+
+      <p style="margin-top:1.8rem;">Predictions differed from the true Month 12 glucose measurement by 3.11 mg/dL on average. The model reduced average error by 15.8% compared with carrying the baseline measurement forward, and a calibration slope of 0.964 is close to the ideal value of 1.00.</p>
+
+      <div class="defs" aria-label="Study design and scope">
+        <div class="def"><span class="k">What was used as input</span><span class="d">Baseline fasting glucose, HDL cholesterol, triglycerides, age, sex, and known randomized study assignment.</span></div>
+        <div class="def"><span class="k">What was predicted</span><span class="d">The participant's directly measured fasting glucose after 12 months, reported in mg/dL.</span></div>
+        <div class="def"><span class="k">What was the baseline</span><span class="d">Assume the participant's future glucose stays equal to their baseline glucose measurement.</span></div>
+        <div class="def"><span class="k">Important limitation</span><span class="d">A small research pilot in a selected group of generally healthy participants. Observed Month 12 glucose ranged from 67 to 97 mg/dL. The result does not establish performance for people with diabetes, clinical utility, or individualized treatment-response prediction.</span></div>
+      </div>
+    </section>
+
     <section id="data-sources">
       <p class="sec-eyebrow"><b>Data</b> · Sources</p>
       <h2>The datasets</h2>
@@ -623,6 +674,7 @@
         <div class="def"><span class="k"><a href="https://share-eric.eu/" target="_blank" rel="noopener">SHARE ↗</a></span><span class="d">Survey of Health, Ageing and Retirement in Europe: easySHARE release; grip-strength forecasts use Waves 8–9. share-eric.eu</span></div>
         <div class="def"><span class="k"><a href="https://survey.keis.or.kr/" target="_blank" rel="noopener">KLoSA ↗</a></span><span class="d">Korean Longitudinal Study of Ageing: Korea Employment Information Service; grip-strength replication uses Waves 2–3. survey.keis.or.kr</span></div>
         <div class="def"><span class="k"><a href="https://lasi-dad.org/" target="_blank" rel="noopener">LASI-DAD ↗</a></span><span class="d">Longitudinal Aging Study in India · Diagnostic Assessment of Dementia: next-wave cognition forecasts. lasi-dad.org</span></div>
+        <div class="def"><span class="k"><a href="https://calerie.duke.edu/" target="_blank" rel="noopener">CALERIE ↗</a></span><span class="d">Comprehensive Assessment of Long-term Effects of Reducing Intake of Energy: randomized caloric-restriction trial; fasting-glucose pilot. calerie.duke.edu</span></div>
       </div>
       <p class="tbl-note">All datasets are public under their respective conditions of use; raw files require a free registered account with each study.</p>
     </section>
